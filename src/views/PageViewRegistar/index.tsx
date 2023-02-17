@@ -10,17 +10,21 @@ import {
   FormQuestion,
   FormQuestionAction,
   FormErrorMsg,
-} from "./styles";
+} from "../LoginView/styles";
 
 import { TextField } from "@mui/material";
-import { UserLoginType } from "@/src/typescript/user";
+import { User, UserLoginType } from "@/src/typescript/user";
 import { login } from "@/src/services/auth";
 import { useRouter } from "next/router";
 
-const LoginView = () => {
-  const [loginData, setLoginData] = useState<UserLoginType>({
+const PageViewRegistar = () => {
+  const [registerData, setRegisterData] = useState<User>({
     email: "",
     password: "",
+    address: "",
+    firstname: "",
+    lastaname: "",
+    phone: "",
   });
 
   const [msgError, setMessageError] = useState("");
@@ -29,8 +33,8 @@ const LoginView = () => {
 
   const handleChange = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
-    setLoginData({
-      ...loginData,
+    setRegisterData({
+      ...registerData,
       [target.name]: target.value,
     });
 
@@ -38,47 +42,68 @@ const LoginView = () => {
   };
 
   const handleLogin = async () => {
-    if (loginData.email === "" && loginData.password === "") {
+    if (registerData.email === "" && registerData.password === "") {
       setMessageError("Os campos são obrigatórios");
     } else {
-      setLoading(true);
-      const result = await login(loginData);
+      const result = await login(registerData);
 
       if (result.status === 201) {
         router.push("/");
       } else {
         setMessageError(result.msg);
       }
-
-      setLoading(false);
     }
   };
 
   return (
-    <PageLayout title="Entrar">
+    <PageLayout title="Registar">
       <ViewContainer>
         <FormContainer>
           <FormTitle>Entrar</FormTitle>
           <FormSubtitle>Entre e arrenda uma bicicleta hoje</FormSubtitle>
-          <TextField
-            onChange={handleChange}
-            name="email"
-            className="ipt-form"
-            placeholder="Email"
-          />
-          <TextField
-            onChange={handleChange}
-            name="password"
-            className="ipt-form"
-            placeholder="Password"
-          />
+          <div className="register-form-ipts">
+            <TextField
+              onChange={handleChange}
+              name="firstname"
+              className="ipt-form"
+              placeholder="Primeiro nome"
+            />
+            <TextField
+              onChange={handleChange}
+              name="lastname"
+              className="ipt-form"
+              placeholder="Último nome"
+            />
+            <TextField
+              onChange={handleChange}
+              name="address"
+              className="ipt-form"
+              placeholder="Endereço de entrega"
+            />
+            <TextField
+              onChange={handleChange}
+              name="phone"
+              className="ipt-form"
+              placeholder="Telefone"
+            />
+            <TextField
+              onChange={handleChange}
+              name="email"
+              className="ipt-form"
+              placeholder="Email"
+            />
+            <TextField
+              onChange={handleChange}
+              name="password"
+              className="ipt-form"
+              placeholder="Palavra passe"
+            />
+          </div>
 
           {!!msgError && <FormErrorMsg>{msgError}</FormErrorMsg>}
-
           <ButtonEnter disabled={loading} onClick={handleLogin}>
             {loading ? "carregando" : "Entrar"}
           </ButtonEnter>
-
           <div className="question-container">
             <FormQuestion>Não possui uma conta ?</FormQuestion>
             <FormQuestionAction onClick={() => router.push("/registar")}>
@@ -91,4 +116,4 @@ const LoginView = () => {
   );
 };
 
-export default LoginView;
+export default PageViewRegistar;

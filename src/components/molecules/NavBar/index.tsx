@@ -6,7 +6,7 @@ interface NavBarProps {
 
 const NavBar = ({ title }: NavBarProps) => {
   return (
-    <NavBarContainer isTransparent={title === "Entrar"}>
+    <NavBarContainer isTransparent={title === "Entrar" || title === "Registar"}>
       <NavBarLogo>Bike Rentz</NavBarLogo>
     </NavBarContainer>
   );
