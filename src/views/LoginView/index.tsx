@@ -13,11 +13,9 @@ import {
 } from "./styles";
 
 import { TextField } from "@mui/material";
-
-interface UserLoginType {
-  email: string;
-  password: string;
-}
+import { UserLoginType } from "@/src/typescript/user";
+import { login } from "@/src/services/auth";
+import { useRouter } from "next/router";
 
 const LoginView = () => {
   const [loginData, setLoginData] = useState<UserLoginType>({
@@ -27,6 +25,7 @@ const LoginView = () => {
 
   const [msgError, setMessageError] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleChange = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
@@ -38,11 +37,17 @@ const LoginView = () => {
     setMessageError("");
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (loginData.email === "" && loginData.password === "") {
       setMessageError("Os campos são obrigatórios");
     } else {
-      //
+      const result = await login(loginData);
+
+      if (result.status === 201) {
+        router.push("/");
+      } else {
+        setMessageError(result.msg);
+      }
     }
   };
 
@@ -73,7 +78,9 @@ const LoginView = () => {
 
           <div className="question-container">
             <FormQuestion>Não possui uma conta ?</FormQuestion>
-            <FormQuestionAction>Registar</FormQuestionAction>
+            <FormQuestionAction onClick={() => router.push("/registar")}>
+              Registar
+            </FormQuestionAction>
           </div>
         </FormContainer>
       </ViewContainer>
