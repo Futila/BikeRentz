@@ -14,7 +14,7 @@ import {
 
 import { TextField } from "@mui/material";
 import { User, UserLoginType } from "@/src/typescript/user";
-import { login } from "@/src/services/auth";
+import { login, register } from "@/src/services/auth";
 import { useRouter } from "next/router";
 import { validateRegisterForm } from "@/src/helpers/validation";
 
@@ -48,18 +48,6 @@ const PageViewRegistar = () => {
   };
 
   const handleLogin = async () => {
-    // if (registerData.email === "" && registerData.password === "") {
-    // } else {
-    //   setLoading(true);
-    //   const result = await login(registerData);
-    //   if (result.status === 201) {
-    //     router.push("/");
-    //   } else {
-    //     setMessageError(result.msg);
-    //   }
-    //   setLoading(false);
-    // }
-
     const result = validateRegisterForm(registerData);
 
     if (result) {
@@ -68,6 +56,17 @@ const PageViewRegistar = () => {
         msg: `${result} está vazio, todos os campos são obrigatórios.`,
       });
     } else {
+      setLoading(true);
+      const result = await register(registerData);
+      if (result.status === 201) {
+        router.push("/");
+      } else {
+        setMessageError({
+          field: "",
+          msg: `${result.msg}`,
+        });
+      }
+      setLoading(false);
     }
   };
 
