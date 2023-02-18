@@ -16,18 +16,24 @@ import { TextField } from "@mui/material";
 import { User, UserLoginType } from "@/src/typescript/user";
 import { login } from "@/src/services/auth";
 import { useRouter } from "next/router";
+import { validateRegisterForm } from "@/src/helpers/validation";
+
+const msgErrorDefault = {
+  field: "",
+  msg: "",
+};
 
 const PageViewRegistar = () => {
   const [registerData, setRegisterData] = useState<User>({
+    firstname: "",
+    lastname: "",
+    address: "",
+    phone: "",
     email: "",
     password: "",
-    address: "",
-    firstname: "",
-    lastaname: "",
-    phone: "",
   });
 
-  const [msgError, setMessageError] = useState("");
+  const [msgError, setMessageError] = useState(msgErrorDefault);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -38,20 +44,30 @@ const PageViewRegistar = () => {
       [target.name]: target.value,
     });
 
-    setMessageError("");
+    setMessageError(msgErrorDefault);
   };
 
   const handleLogin = async () => {
-    if (registerData.email === "" && registerData.password === "") {
-      setMessageError("Os campos são obrigatórios");
-    } else {
-      const result = await login(registerData);
+    // if (registerData.email === "" && registerData.password === "") {
+    // } else {
+    //   setLoading(true);
+    //   const result = await login(registerData);
+    //   if (result.status === 201) {
+    //     router.push("/");
+    //   } else {
+    //     setMessageError(result.msg);
+    //   }
+    //   setLoading(false);
+    // }
 
-      if (result.status === 201) {
-        router.push("/");
-      } else {
-        setMessageError(result.msg);
-      }
+    const result = validateRegisterForm(registerData);
+
+    if (result) {
+      setMessageError({
+        field: result,
+        msg: `${result} está vazio, todos os campos são obrigatórios.`,
+      });
+    } else {
     }
   };
 
@@ -67,47 +83,53 @@ const PageViewRegistar = () => {
               name="firstname"
               className="ipt-form"
               placeholder="Primeiro nome"
+              error={msgError.field === "firstname"}
             />
             <TextField
               onChange={handleChange}
               name="lastname"
               className="ipt-form"
               placeholder="Último nome"
+              error={msgError.field === "lastname"}
             />
             <TextField
               onChange={handleChange}
               name="address"
               className="ipt-form"
               placeholder="Endereço de entrega"
+              error={msgError.field === "address"}
             />
             <TextField
               onChange={handleChange}
               name="phone"
               className="ipt-form"
               placeholder="Telefone"
+              error={msgError.field === "phone"}
             />
             <TextField
               onChange={handleChange}
               name="email"
               className="ipt-form"
               placeholder="Email"
+              error={msgError.field === "email"}
             />
             <TextField
               onChange={handleChange}
               name="password"
               className="ipt-form"
               placeholder="Palavra passe"
+              error={msgError.field === "password"}
             />
           </div>
 
-          {!!msgError && <FormErrorMsg>{msgError}</FormErrorMsg>}
+          {!!msgError && <FormErrorMsg>{msgError.msg}</FormErrorMsg>}
           <ButtonEnter disabled={loading} onClick={handleLogin}>
-            {loading ? "carregando" : "Entrar"}
+            {loading ? "carregando" : "Registar"}
           </ButtonEnter>
           <div className="question-container">
             <FormQuestion>Não possui uma conta ?</FormQuestion>
-            <FormQuestionAction onClick={() => router.push("/registar")}>
-              Registar
+            <FormQuestionAction onClick={() => router.push("/login")}>
+              Login
             </FormQuestionAction>
           </div>
         </FormContainer>

@@ -30,6 +30,12 @@ export const FormContainer = styled.div`
     flex-direction: row;
     margin-top: 10px;
   }
+
+  .register-form-ipts {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+  }
 `;
 
 export const FormTitle = styled.h1`

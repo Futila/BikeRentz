@@ -16,6 +16,12 @@ import { TextField } from "@mui/material";
 import { UserLoginType } from "@/src/typescript/user";
 import { login } from "@/src/services/auth";
 import { useRouter } from "next/router";
+import { validateLoginForm } from "@/src/helpers/validation";
+
+const msgErrorDefault = {
+  field: "",
+  msg: "",
+};
 
 const LoginView = () => {
   const [loginData, setLoginData] = useState<UserLoginType>({
@@ -23,7 +29,7 @@ const LoginView = () => {
     password: "",
   });
 
-  const [msgError, setMessageError] = useState("");
+  const [msgError, setMessageError] = useState(msgErrorDefault);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -34,12 +40,17 @@ const LoginView = () => {
       [target.name]: target.value,
     });
 
-    setMessageError("");
+    setMessageError(msgErrorDefault);
   };
 
   const handleLogin = async () => {
-    if (loginData.email === "" && loginData.password === "") {
-      setMessageError("Os campos são obrigatórios");
+    const result = validateLoginForm(loginData);
+
+    if (result) {
+      setMessageError({
+        field: "",
+        msg: `${result} está vazio, todos os campos são obrigatórios.`,
+      });
     } else {
       setLoading(true);
       const result = await login(loginData);
@@ -47,7 +58,7 @@ const LoginView = () => {
       if (result.status === 201) {
         router.push("/");
       } else {
-        setMessageError(result.msg);
+        setMessageError({ field: "", msg: result.msg });
       }
 
       setLoading(false);
@@ -73,7 +84,7 @@ const LoginView = () => {
             placeholder="Password"
           />
 
-          {!!msgError && <FormErrorMsg>{msgError}</FormErrorMsg>}
+          {!!msgError && <FormErrorMsg>{msgError.msg}</FormErrorMsg>}
 
           <ButtonEnter disabled={loading} onClick={handleLogin}>
             {loading ? "carregando" : "Entrar"}
