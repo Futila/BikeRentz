@@ -1,7 +1,5 @@
-import { Inter } from "@next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { HomeView } from "../views/HomeView";
 
 export default function Home() {
-  return <>Arrendamento de bicicleta</>;
+  return <HomeView />;
 }
