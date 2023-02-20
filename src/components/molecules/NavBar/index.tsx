@@ -22,8 +22,12 @@ const LOGGED_ROUTE = [
 const NavBar = ({ title }: NavBarProps) => {
   const { isLogged } = useGetUserInfo();
   const router = useRouter();
+
+  const isTransparent =
+    title === "Entrar" || title === "Registar" || title === "Home";
+
   return (
-    <NavBarContainer isTransparent={title === "Entrar" || title === "Registar"}>
+    <NavBarContainer isTransparent={isTransparent}>
       <NavBarLogo>Bike Rentz</NavBarLogo>
 
       {!isLogged && (

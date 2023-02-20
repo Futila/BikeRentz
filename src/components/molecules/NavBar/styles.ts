@@ -17,6 +17,11 @@ export const NavBarContainer = styled.div<NavBarContainerProps>`
   justify-content: space-between;
   padding-left: 100px;
   padding-right: 100px;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
 `;
 
 export const NavBarLogo = styled.h1`
