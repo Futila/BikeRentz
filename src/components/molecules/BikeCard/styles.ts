@@ -49,7 +49,7 @@ export const BikeCardImagesContainer = styled.div`
 export const BikeCardCover = styled.img`
   width: 366px;
   height: 259px;
-  background: red;
+  object-fit: scale-down;
 `;
 
 export const BikeCardImagesCoursel = styled.div`
@@ -60,12 +60,20 @@ export const BikeCardImagesCoursel = styled.div`
   justify-content: space-evenly;
 `;
 
-export const BikeCardImagesCourselItem = styled.img`
+interface CourselItemProps {
+  active: boolean;
+}
+
+export const BikeCardImagesCourselItem = styled.img<CourselItemProps>`
   width: 43px;
   height: 43px;
   background: #ffffff;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 2px 2px
+    ${({ active }) => (active ? "#e6474b" : "transparent")};
   border-radius: 2px;
+  cursor: pointer;
+  object-fit: cover;
+  border: 1px solid ${({ active }) => (active ? "#e6474b" : "transparent")};
 `;
 
 export const BikeCardDescription = styled.ul`

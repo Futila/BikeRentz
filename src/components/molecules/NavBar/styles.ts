@@ -25,12 +25,10 @@ export const NavBarContainer = styled.div<NavBarContainerProps>`
 `;
 
 export const NavBarLogo = styled.h1`
-  font-family: "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 35px;
   line-height: 43px;
-
   color: #e6474b;
 `;
 
@@ -46,15 +44,12 @@ export const MenuList = styled.ul`
 `;
 
 export const MenuItem = styled.li`
-  font-family: "Helvetica Neue";
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 23px;
-
   color: #ffffff;
   cursor: pointer;
-
   margin-left: 15px;
 `;
 

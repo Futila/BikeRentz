@@ -39,7 +39,6 @@ export const FormContainer = styled.div`
 `;
 
 export const FormTitle = styled.h1`
-  font-family: "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 45px;
@@ -48,7 +47,6 @@ export const FormTitle = styled.h1`
 `;
 
 export const FormSubtitle = styled.p`
-  font-family: "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 28px;
@@ -66,7 +64,6 @@ export const ButtonEnter = styled.button`
   outline: none;
   border: none;
 
-  font-family: "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
@@ -79,7 +76,6 @@ export const ButtonEnter = styled.button`
 `;
 
 export const FormQuestion = styled.p`
-  font-family: "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -95,7 +91,6 @@ export const FormQuestionAction = styled(FormQuestion)`
 `;
 
 export const FormErrorMsg = styled.p`
-  font-family: "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 12px;

@@ -22,14 +22,14 @@ export const NewBikesList = styled.div`
   width: 75%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(2, 49%);
+  grid-template-columns: repeat(2, 50%);
   grid-gap: 20px;
   justify-content: space-between;
   margin-top: 30px;
 
   .box {
     height: 500px;
-    widt: 100%;
+    width: 100%;
     background: red;
   }
 `;

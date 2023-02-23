@@ -35,11 +35,10 @@ export const HeroTextInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 
 export const HeroTitle = styled.h1`
-  font-family: "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 58px;
@@ -50,7 +49,6 @@ export const HeroTitle = styled.h1`
 `;
 
 export const HeroText = styled.p`
-  font-family: "Helvetica Neue";
   font-style: normal;
   font-weight: 700;
   font-size: 37px;
@@ -60,7 +58,6 @@ export const HeroText = styled.p`
 `;
 
 export const HeroButton = styled.button`
-  font-family: "Helvetica Neue";
   font-style: normal;
   font-weight: 500;
   font-size: 19px;

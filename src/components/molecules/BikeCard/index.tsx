@@ -1,46 +1,44 @@
 import {
   BikeCardTitle,
   BikeCardContainer,
-  BikeCardCover,
   BikeCardDescription,
   BikeCardButton,
   BikeCardDescriptionItem,
   BikeCardEngineName,
-  BikeCardImagesContainer,
-  BikeCardImagesCoursel,
-  BikeCardImagesCourselItem,
   BikeCardPrice,
 } from "./styles";
 
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { Bike } from "@/src/typescript/bikes";
+import BikeImageCarousel from "./bike-card-image-carousel";
 
-const BikeCard = () => (
-  <BikeCardContainer>
-    <BikeCardTitle>Binazinha</BikeCardTitle>
-    <BikeCardEngineName>Bicicleta</BikeCardEngineName>
-    <BikeCardPrice>$10/hora</BikeCardPrice>
-    <BikeCardImagesContainer>
-      <BikeCardCover src="" alt="" />
+interface BikeCardProps {
+  bike: Bike;
+}
 
-      <BikeCardImagesCoursel>
-        {[1, 2, 3].map((item) => (
-          <BikeCardImagesCourselItem key={item} src="" alt="" />
+const BikeCard = ({ bike }: BikeCardProps) => {
+  const { cover, engine, features, id, images, name, price } = bike;
+
+  return (
+    <BikeCardContainer>
+      <BikeCardTitle>{name}</BikeCardTitle>
+      <BikeCardEngineName>{engine}</BikeCardEngineName>
+      <BikeCardPrice>${price}/hora</BikeCardPrice>
+      <BikeImageCarousel cover={cover} images={images} />
+
+      <BikeCardDescription>
+        {features.map((item) => (
+          <BikeCardDescriptionItem key={item.title}>
+            <div className="dot" />
+            <p className="text">{item.title}</p>
+          </BikeCardDescriptionItem>
         ))}
-      </BikeCardImagesCoursel>
-    </BikeCardImagesContainer>
-
-    <BikeCardDescription>
-      {[1, 2, 3, 4].map((item) => (
-        <BikeCardDescriptionItem key={item}>
-          <div className="dot" />
-          <p className="text">Alguma coisa sobre a bike</p>
-        </BikeCardDescriptionItem>
-      ))}
-    </BikeCardDescription>
-    <BikeCardButton>
-      <AiOutlineArrowRight fontSize={35} color="#E6474B" />
-    </BikeCardButton>
-  </BikeCardContainer>
-);
+      </BikeCardDescription>
+      <BikeCardButton>
+        <AiOutlineArrowRight fontSize={35} color="#E6474B" />
+      </BikeCardButton>
+    </BikeCardContainer>
+  );
+};
 
 export default BikeCard;
