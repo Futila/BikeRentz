@@ -47,7 +47,7 @@ export const BikeCardImagesContainer = styled.div`
 `;
 
 export const BikeCardCover = styled.img`
-  width: 366px;
+  width: 300px;
   height: 259px;
   object-fit: scale-down;
 `;

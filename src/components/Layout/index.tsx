@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Footer from "../molecules/Footer";
 import NavBar from "../molecules/NavBar";
 import { PageLayoutContainer } from "./styles";
 
@@ -15,6 +16,7 @@ const PageLayout = ({ children, title }: PageLayoutProps) => {
       </Head>
       <NavBar title={title} />
       {children}
+      <Footer />
     </PageLayoutContainer>
   );
 };
