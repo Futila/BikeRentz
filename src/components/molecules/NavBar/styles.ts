@@ -30,6 +30,7 @@ export const NavBarLogo = styled.h1`
   font-size: 35px;
   line-height: 43px;
   color: #e6474b;
+  cursor: pointer;
 `;
 
 export const MenuContainer = styled.div`

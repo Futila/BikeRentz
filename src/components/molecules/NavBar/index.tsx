@@ -28,7 +28,7 @@ const NavBar = ({ title }: NavBarProps) => {
 
   return (
     <NavBarContainer isTransparent={isTransparent}>
-      <NavBarLogo>Bike Rentz</NavBarLogo>
+      <NavBarLogo onClick={() => router.push("/")}>Bike Rentz</NavBarLogo>
 
       {!isLogged && (
         <MenuContainer>
