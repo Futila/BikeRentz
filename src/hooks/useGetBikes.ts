@@ -7,7 +7,12 @@ interface useGetBikesProps {
   page?: number;
 }
 
-export const useGetBikes = ({ limit }: useGetBikesProps) => {
+interface GetBikes {
+  bikes: Bike[];
+  loading: boolean;
+}
+
+export const useGetBikes = ({ limit }: useGetBikesProps): GetBikes => {
   const [bikes, setBikes] = useState<Bike[]>([]);
   const [loading, setLoading] = useState(false);
 
