@@ -1,6 +1,7 @@
 import PageLayout from "@/src/components/Layout";
 import BikeCard from "@/src/components/molecules/BikeCard";
 import BikeFilter, { IFilter } from "@/src/components/molecules/BikeFilter";
+import Pagination from "@/src/components/molecules/Pagination";
 import { useGetBikes } from "@/src/hooks/useGetBikes";
 import { SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
@@ -63,7 +64,15 @@ const BikesPageView = () => {
           ))}
         </BikesList>
 
-        <PaginationContainer>Paginação</PaginationContainer>
+        <PaginationContainer>
+          <Pagination
+            handleAtivePage={(page: number) => setPage(page)}
+            handlePrevPage={() => null}
+            handleNextPage={() => null}
+            pages={[1, 2, 3]}
+            page={page}
+          />
+        </PaginationContainer>
       </BikesViewContainer>
     </PageLayout>
   );

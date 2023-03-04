@@ -40,8 +40,5 @@ export const PaginationContainer = styled.div`
   width: 100%;
   height: 100px;
 
-  /* display: flex;
-  flex-direction: column;
-
-  align-items: center; */
+  margin-top: 70px;
 `;
