@@ -5,6 +5,7 @@ import {
 } from "./styles";
 
 import { BiSearchAlt2 } from "react-icons/bi";
+import { GiPriceTag, GiDutchBike } from "react-icons/gi";
 import {
   FormControl,
   InputLabel,
@@ -50,7 +51,7 @@ const BikeFilter = ({
       </FieldContainer>
       <FieldContainer>
         <div className="field-icon">
-          <BiSearchAlt2 />
+          <GiPriceTag />
         </div>
         <TextField
           name="price"
@@ -62,10 +63,10 @@ const BikeFilter = ({
       </FieldContainer>
       <FieldContainer>
         <div className="field-icon">
-          <BiSearchAlt2 />
+          <GiDutchBike />
         </div>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label"></InputLabel>
+          <InputLabel id="demo-simple-select-label">Motor</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

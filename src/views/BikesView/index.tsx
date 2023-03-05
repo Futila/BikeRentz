@@ -25,7 +25,15 @@ const BikesPageView = () => {
 
   const limit = 6;
 
-  const { bikes, loading } = useGetBikes({ limit });
+  const { search, engine, price } = filter;
+  const { bikes, loading } = useGetBikes({
+    limit,
+    search,
+    engine,
+    price,
+    page,
+    isFilter: true,
+  });
 
   const handleChange = (
     event: React.ChangeEvent | SelectChangeEvent<string>
