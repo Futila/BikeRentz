@@ -23,10 +23,12 @@ const BikesPageView = () => {
   });
   const [page, setPage] = useState(1);
 
-  const limit = 6;
+  console.log("state update");
+
+  const limit = 3;
 
   const { search, engine, price } = filter;
-  const { bikes, loading } = useGetBikes({
+  const { bikes, loading, totalItems } = useGetBikes({
     limit,
     search,
     engine,
@@ -48,6 +50,14 @@ const BikesPageView = () => {
 
   const handleSearch = () => {
     console.log(filter);
+  };
+
+  const generatePageNumber = (): number[] => {
+    const pageQty = Math.ceil(totalItems / limit);
+
+    const result = [Array.from(Array(pageQty).keys())];
+
+    return result[0];
   };
 
   return (
@@ -77,8 +87,8 @@ const BikesPageView = () => {
             handleAtivePage={(page: number) => setPage(page)}
             handlePrevPage={() => null}
             handleNextPage={() => null}
-            pages={[1, 2, 3]}
             page={page}
+            pages={generatePageNumber()}
           />
         </PaginationContainer>
       </BikesViewContainer>

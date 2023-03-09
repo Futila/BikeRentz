@@ -1,6 +1,11 @@
 import { Bike } from "../typescript/bikes";
 import { api } from "./api";
 
+interface GetBikesResponse {
+  bikes: Bike[];
+  totalItems: number;
+}
+
 interface getBikesProps {
   limit: number;
   page?: number;
@@ -15,17 +20,19 @@ export const getBikes = async ({
   page = 1,
   price,
   search = "",
-}: getBikesProps): Promise<Bike[]> => {
+}: getBikesProps): Promise<GetBikesResponse> => {
   const params = new URLSearchParams({
-    name_like: search,
     engine_like: engine as any,
-    _limit: limit + "",
     _page: `${page}`,
+    _limit: limit + "",
+    name_like: search,
   }).toString();
 
   const response = await api.get(
     "/bikes?" + params + `${price ? `&price=${price}` : ""}`
   );
 
-  return response.data;
+  const totalItems = Number(response.headers["x-total-count"]) || 0;
+
+  return { bikes: response.data as Bike[], totalItems };
 };

@@ -14,6 +14,7 @@ interface useGetBikesProps {
 interface GetBikes {
   bikes: Bike[];
   loading: boolean;
+  totalItems: number;
 }
 
 export const useGetBikes = ({
@@ -26,19 +27,25 @@ export const useGetBikes = ({
 }: useGetBikesProps): GetBikes => {
   const [bikes, setBikes] = useState<Bike[]>([]);
   const [loading, setLoading] = useState(false);
+  const [totalItems, setTotalItems] = useState(0);
 
   const handlegGetBikes = async () => {
     setLoading(true);
     let result: Bike[] = [];
+    let total = 0;
 
     if (isFilter) {
-      result = await getBikes({ limit, search, engine, page, price });
-      setBikes(result);
+      const response = await getBikes({ limit, search, engine, page, price });
+      result = response.bikes;
+      total = response.totalItems;
     } else {
-      result = await getBikes({ limit });
-      setBikes(result);
+      const response = await getBikes({ limit, search, engine, page, price });
+      result = response.bikes;
+      total = response.totalItems;
     }
 
+    setTotalItems(total);
+    setBikes(result);
     setLoading(false);
   };
 
@@ -46,5 +53,5 @@ export const useGetBikes = ({
     handlegGetBikes();
   }, [search, engine, price]);
 
-  return { bikes, loading };
+  return { bikes, loading, totalItems };
 };
